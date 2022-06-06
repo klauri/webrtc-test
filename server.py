@@ -7,7 +7,7 @@ import ssl
 import uuid
 
 import cv2
-import numpy as np
+# import numpy as np
 from aiohttp import web
 from pyzbar.pyzbar import decode
 from av import VideoFrame
@@ -97,9 +97,8 @@ class VideoTransformTrack(MediaStreamTrack):
                             (barcode.rect.left + barcode.rect.width, barcode.rect.top + barcode.rect.height),
                             color=(255, 0, 0),
                             thickness=5)
-                #if len(barcode.data.decode('utf-8')) > 12:
-                print(barcode.data.decode('utf-8'))
-                cv2.imwrite('saved_barcode.png', img)
+                if len(barcode.data.decode('utf-8')) > 12:
+                    cv2.imwrite('saved_barcode.png', img)
             new_frame = VideoFrame.from_ndarray(img, format="bgr24")
             new_frame.pts = frame.pts
             new_frame.time_base = frame.time_base
@@ -216,7 +215,7 @@ if __name__ == "__main__":
     parser.add_argument("--cert-file", help="SSL certificate file (for HTTPS)")
     parser.add_argument("--key-file", help="SSL key file (for HTTPS)")
     parser.add_argument(
-        "--host", default="localhost", help="Host for HTTP server (default: 0.0.0.0)"
+        "--host", default="0.0.0.0", help="Host for HTTP server (default: 0.0.0.0)"
     )
     parser.add_argument(
         "--port", type=int, default=8080, help="Port for HTTP server (default: 8080)"

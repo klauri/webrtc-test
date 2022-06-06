@@ -39,6 +39,7 @@ function createPeerConnection() {
 
     // connect audio / video
     pc.addEventListener('track', function(evt) {
+        console.log(evt.streams)
         if (evt.track.kind == 'video')
             document.getElementById('video').srcObject = evt.streams[0];
         else
@@ -166,7 +167,7 @@ function start() {
         if (constraints.video) {
             document.getElementById('media').style.display = 'block';
         }
-        navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+        navigator.mediaDevices.getUserMedia({video: { width: 1280, height: 720,facingMode: 'environment' }}).then(function(stream) {
             stream.getTracks().forEach(function(track) {
                 pc.addTrack(track, stream);
             });
