@@ -89,7 +89,7 @@ class VideoTransformTrack(MediaStreamTrack):
             new_frame.time_base = frame.time_base
             return new_frame
         elif self.transform == "barcode":
-            img = frame #.to_ndarray(format="bgr24")
+            img = frame.to_ndarray(format="bgr24")
             barcodes = decode(img)
             for barcode in barcodes:
                 img = cv2.rectangle(img, (barcode.rect.left, barcode.rect.top), 
