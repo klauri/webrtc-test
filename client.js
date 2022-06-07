@@ -167,7 +167,7 @@ function start() {
         if (constraints.video) {
             document.getElementById('media').style.display = 'block';
         }
-        navigator.mediaDevices.getUserMedia({video: { width: 1280, height: 720,facingMode: 'environment' }}).then(function(stream) {
+        navigator.mediaDevices.getUserMedia({video: { width: 1280, height: 720, facingMode: 'environment' }}).then(function(stream) {
             stream.getTracks().forEach(function(track) {
                 pc.addTrack(track, stream);
             });
